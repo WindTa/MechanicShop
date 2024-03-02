@@ -1,7 +1,9 @@
 package mechanic_shop.ui.controllers;
 
 import mechanic_shop.domain.CustomerService;
+import mechanic_shop.domain.Result;
 import mechanic_shop.models.Customer;
+import mechanic_shop.ui.menus.CustomerMenu;
 import mechanic_shop.ui.views.View;
 
 public class CustomerController {
@@ -14,6 +16,8 @@ public class CustomerController {
     }
 
     public void findByLID() {
+        view.displayHeader(CustomerMenu.FIND_CUSTOMER_BY_LID.toString());
+
         String LID = view.readRequiredString("Search by license ID: ");
         Customer customer = service.findByLID(LID);
 
@@ -26,7 +30,16 @@ public class CustomerController {
     }
 
     public void add() {
-        System.out.println("add customer");
+        view.displayHeader(CustomerMenu.CREATE_CUSTOMER.toString());
+
+        Customer customer = view.addCustomer();
+        if (customer == null) {
+            return;
+        }
+
+        Result<Customer> result = service.add(customer);
+        view.displayResult(result);
+
     }
 
     public void update() {

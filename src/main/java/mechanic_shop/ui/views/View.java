@@ -1,5 +1,6 @@
 package mechanic_shop.ui.views;
 
+import mechanic_shop.domain.Result;
 import mechanic_shop.models.Customer;
 import mechanic_shop.ui.ConsoleIO;
 import mechanic_shop.ui.menus.CustomerMenu;
@@ -46,6 +47,16 @@ public class View {
         return io.readRequiredString(prompt);
     }
 
+    public Customer addCustomer() {
+        String licenseId = io.readRequiredString("Driver's License ID: ");
+        String name = io.readRequiredString("Name: ");
+        int age = io.readInt("Age: ");
+        String phone = io.readRequiredString("Phone: ");
+        String email = io.readRequiredString("Email: ");
+
+        return new Customer(0, licenseId, name, age, phone, email);
+    }
+
     public void displayHeader(String message) {
         io.println("");
         io.println(message);
@@ -57,6 +68,17 @@ public class View {
                 customer.getCustomerId(), customer.getLicenseId(),
                 customer.getName(), customer.getAge(),
                 customer.getPhone(), customer.getEmail());
+    }
+
+    public void displayResult(Result<?> result) {
+        if (result.isSuccess()) {
+            io.println("Success!");
+        } else {
+            io.println("Err:");
+            for (String message : result.getErrorMessages()) {
+                io.println(message);
+            }
+        }
     }
 
     public void displayErr(String err) {

@@ -1,5 +1,6 @@
-package data;
+package mechanic_shop.data;
 
+import mechanic_shop.TestData;
 import mechanic_shop.data.CustomerJdbcTemplateRepository;
 import mechanic_shop.DataHelper;
 import mechanic_shop.models.Customer;
@@ -7,8 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerJdbcTemplateRepositoryTest {
     JdbcTemplate jdbcTemplate = DataHelper.getJdbcTemplate();
@@ -21,11 +21,20 @@ class CustomerJdbcTemplateRepositoryTest {
 
     @Test
     void shouldFindByLID() {
-        Customer expected = new Customer(1, "Y111111", "Customer1", 26, "111-111-1111", "Customer1@gmail.com");
+        Customer expected = TestData.CUSTOMER1;
         Customer actual = repository.findByLID("Y111111");
 
         assertNotNull(actual);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldAdd() {
+        Customer newCustomer = TestData.NEW_CUSTOMER;
+        Customer actual = repository.add(newCustomer);
+
+        assertNotNull(actual);
+        assertEquals(newCustomer.getLicenseId(), actual.getLicenseId());
     }
 
 }

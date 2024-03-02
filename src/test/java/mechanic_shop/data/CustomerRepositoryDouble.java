@@ -1,5 +1,6 @@
-package data;
+package mechanic_shop.data;
 
+import mechanic_shop.TestData;
 import mechanic_shop.data.CustomerRepository;
 import mechanic_shop.models.Customer;
 
@@ -7,12 +8,16 @@ public class CustomerRepositoryDouble implements CustomerRepository {
 
     @Override
     public Customer findByLID(String LID) {
-        return new Customer(1, "Y111111", "Customer1", 26, "111-111-1111", "Customer1@gmail.com");
+        if (LID.equals("Y333333")) return null;
+        return TestData.CUSTOMER1;
     }
 
     @Override
     public Customer add(Customer customer) {
-        return null;
+        if (customer != null) {
+            customer.setCustomerId(3);
+        }
+        return customer;
     }
 
     @Override
