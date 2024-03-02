@@ -1,4 +1,4 @@
-package ui.menus;
+package mechanic_shop.ui.menus;
 
 public enum MechanicMenu {
     RETURN_TO_MAIN_MENU("Return to main menu"),

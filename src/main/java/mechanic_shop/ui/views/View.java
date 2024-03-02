@@ -1,9 +1,10 @@
-package ui.views;
+package mechanic_shop.ui.views;
 
-import ui.ConsoleIO;
-import ui.menus.CustomerMenu;
-import ui.menus.MainMenu;
-import ui.menus.MechanicMenu;
+import mechanic_shop.models.Customer;
+import mechanic_shop.ui.ConsoleIO;
+import mechanic_shop.ui.menus.CustomerMenu;
+import mechanic_shop.ui.menus.MainMenu;
+import mechanic_shop.ui.menus.MechanicMenu;
 
 public class View {
     private final ConsoleIO io;
@@ -41,10 +42,25 @@ public class View {
         return values[selectOption(MechanicMenu.values())];
     }
 
+    public String readRequiredString(String prompt) {
+        return io.readRequiredString(prompt);
+    }
+
     public void displayHeader(String message) {
         io.println("");
         io.println(message);
         io.println("=".repeat(message.length()));
+    }
+
+    public void displayCustomer(Customer customer) {
+        io.printf("%s: %s | Name: %s | Age: %d | Phone: %s | Email: %s\n",
+                customer.getCustomerId(), customer.getLicenseId(),
+                customer.getName(), customer.getAge(),
+                customer.getPhone(), customer.getEmail());
+    }
+
+    public void displayErr(String err) {
+        io.printf("Err: %s%n", err);
     }
 
     public void displayException(Exception ex) {

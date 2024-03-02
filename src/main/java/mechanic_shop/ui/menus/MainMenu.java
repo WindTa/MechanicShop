@@ -1,4 +1,4 @@
-package ui.menus;
+package mechanic_shop.ui.menus;
 
 public enum MainMenu {
     EXIT("Exit"),

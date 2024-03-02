@@ -1,15 +1,19 @@
-package ui.controllers;
+package mechanic_shop.ui.controllers;
 
-import ui.menus.CustomerMenu;
-import ui.menus.MainMenu;
-import ui.menus.MechanicMenu;
-import ui.views.View;
+import mechanic_shop.ui.menus.CustomerMenu;
+import mechanic_shop.ui.menus.MainMenu;
+import mechanic_shop.ui.menus.MechanicMenu;
+import mechanic_shop.ui.views.View;
 
-public class Controller {
+public class FrontController {
     private final View view;
+    private final CustomerController customerController;
+    private final MechanicController mechanicController;
 
-    public Controller(View view) {
+    public FrontController(View view, CustomerController customerController, MechanicController mechanicController) {
         this.view = view;
+        this.customerController = customerController;
+        this.mechanicController = mechanicController;
     }
 
     public void run() {
@@ -42,10 +46,10 @@ public class Controller {
         do {
             option = view.selectCustomerMenuOption();
             switch(option) {
-                case FIND_CUSTOMER_BY_ID -> System.out.println("find customer by id");
-                case CREATE_CUSTOMER -> System.out.println("create customer");
-                case EDIT_CUSTOMER -> System.out.println("edit customer");
-                case DELETE_CUSTOMER -> System.out.println("delete customer");
+                case FIND_CUSTOMER_BY_LID -> customerController.findByLID();
+                case CREATE_CUSTOMER -> customerController.add();
+                case EDIT_CUSTOMER -> customerController.update();
+                case DELETE_CUSTOMER -> customerController.deleteById();
             }
         } while (option != CustomerMenu.RETURN_TO_MAIN_MENU);
     }
@@ -55,10 +59,10 @@ public class Controller {
         do {
             option = view.selectMechanicMenuOption();
             switch(option) {
-                case FIND_MECHANIC_BY_ID -> System.out.println("find mechanic by id");
-                case CREATE_MECHANIC -> System.out.println("create mechanic");
-                case EDIT_MECHANIC -> System.out.println("edit mechanic");
-                case DELETE_MECHANIC -> System.out.println("delete mechanic");
+                case FIND_MECHANIC_BY_ID -> mechanicController.findById();
+                case CREATE_MECHANIC -> mechanicController.add();
+                case EDIT_MECHANIC -> mechanicController.update();
+                case DELETE_MECHANIC -> mechanicController.deleteById();
             }
         } while (option != MechanicMenu.RETURN_TO_MAIN_MENU);
     }

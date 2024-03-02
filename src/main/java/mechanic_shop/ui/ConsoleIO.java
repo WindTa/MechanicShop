@@ -1,4 +1,4 @@
-package ui;
+package mechanic_shop.ui;
 
 import java.util.Scanner;
 
